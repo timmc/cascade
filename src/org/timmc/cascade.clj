@@ -83,8 +83,8 @@ in core logic paths."
     (assoc cascade node-kw {:clean? initial :deps deps :cleaner cleaner-fn})))
 
 (defn create
-  "Create a cascade manager and initialize by add'ing each triplet of arguments
-   in order."
+  "Create a cascade manager and initialize by adding each triplet of arguments
+   in order. See documentation for #'add."
   [& adds]
   (when-not (zero? (mod (count adds) 3))
     (throw (IllegalArgumentException.

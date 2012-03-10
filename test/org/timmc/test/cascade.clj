@@ -92,12 +92,12 @@
   (is (thrown-with-msg? Exception #"do not exist.*albert"
 	(dirty sample :albert))))
 
-(def l0 (ref 0))
-(def l1 (ref 0))
-(def l3 (ref 0))
-(def l0! (fn [] (dosync (ref-set l0 (inc @l0)))))
-(def l1! (fn [] (dosync (ref-set l1 (inc @l1)))))
-(def l3! (fn [] (dosync (ref-set l3 (inc @l3)))))
+(def l0 (atom 0))
+(def l1 (atom 0))
+(def l3 (atom 0))
+(def l0! #(swap! l0 inc))
+(def l1! #(swap! l1 inc))
+(def l3! #(swap! l3 inc))
 (def diamond (dirty (create :l0 l0! true
 			    :l1 l1! [:l0]
 			    :l2a nil [:l1]
@@ -118,9 +118,9 @@
 
 (deftest total-cleanup
   (dosync
-   (ref-set l0 0)
-   (ref-set l1 0)
-   (ref-set l3 0)
+   (reset! l0 0)
+   (reset! l1 0)
+   (reset! l3 0)
    (let [result (clean diamond :l3)]
      (is (= @l0 0))
      (is (= @l1 1)) ; For performance. (Cleaners should be repeatable.)
