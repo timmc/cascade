@@ -56,12 +56,14 @@ is taken from the Bézier curve editor that originally spawned this library.
 Each node declares a side-effecting cleaner thunk (or nil) and either
 a list of dependency nodes or a boolean indicating whether the node is
 already clean. If the resulting data structure is stored in an atom `c`,
-relying code can call `(swap! c cascade/dirty :center)` to indicate that
-the canvas has been dragged, and then `(swap! c cascade/clean :gui)` to
-recalculate all (and only) the relying nodes from :gui to :center.
+then a drag event handler can call `(swap! c cascade/dirty :center)`
+to indicate that the canvas has been dragged, and then
+`(swap! c cascade/clean :painting)` to recalculate all (and only) the
+relying nodes from :painting down to :center that actually need to
+be updated.
 
 (Note that if a cleaner thunk causes an error, the swap! will fail,
-and the cascade value will remain the same.)
+and the cascade value will remain the same. Plan accordingly.)
 
 See the main namespace docstring for more info: `org.timmc.cascade`
 
