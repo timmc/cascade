@@ -4,10 +4,14 @@ Manage state dirtiness dependency cascades.
 
 ## Get it
 
-1. Leiningen dependency: `[org.timmc/cascade "0.1.0"]`
+1. Leiningen dependency: `[org.timmc/cascade "1.0.0"]`
 2. Add this to your ns block: `(:require [org.timmc.cascade :as cascade])`
 
-## Purpose
+## Building
+
+Built with Leiningen 1.x; should be buildable with 2.x as well.
+
+## Purpose and usage
 
 Let's say you have a GUI with an interactive canvas and a collection
 of related stateful control widgets, such as a rotation slider and a
@@ -67,8 +71,19 @@ and the cascade value will remain the same. Plan accordingly.)
 
 See the main namespace docstring for more info: `org.timmc.cascade`
 
+## Changelog
+
+### v0.1.0
+
+* Initial version
+
+### v1.0.0
+
+* Bump to v1 with no code changes to signify that the API is stable
+* Now tested with Clojure 1.4.0
+
 ## License
 
-Copyright Tim McCormack 2011-2012.
+Copyright Tim McCormack 2011-2013.
 
 Free-licensed under the Eclipse Public License v1.0 (see ./epl-v10.html).

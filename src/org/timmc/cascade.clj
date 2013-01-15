@@ -37,6 +37,9 @@ in core logic paths."
 ;;   - :clean? <boolean> - whether this node is clean
 ;;   - :deps <set<keyword>>} - nodes that this node depends on
 ;;   - :cleaner <fn> - the cleaner for this node of the relying program's state
+;; - For example: {:foo {:clean? true, :deps #{}, :cleaner nil}
+;;                 :bar {:clean? false, :deps #{:foo} :cleaner do-bar!}
+;;                 :baz {:clean? false, :deps #{:foo :bar}, :cleaner do-baz!}}
 
 (defn clean?
   "Check if a node is clean."
